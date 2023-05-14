@@ -1,0 +1,6 @@
+input[type="submit"] {
+    background-color: #0080FF;
+    color: white;
+    border-radius: 3px;
+    border: none;
+  }
