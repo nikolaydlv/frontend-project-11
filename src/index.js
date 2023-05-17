@@ -1,5 +1,6 @@
 import './styles.css';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'bootstrap';
+import 'on-change';
+import 'yup';
 
 console.log('Hello World!');
