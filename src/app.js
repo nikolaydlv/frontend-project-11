@@ -1,7 +1,18 @@
 import * as yup from 'yup';
-import watch from './view';
+import i18next from 'i18next';
+import watch from './view.js';
+import ru from './locales/ru.js';
 
-const app = () => {
+const app = async () => {
+  const i18nextInstance = i18next.createInstance();
+  await i18nextInstance.init({
+    lng: 'ru',
+    debug: true,
+    resources: {
+      ru,
+    },
+  });
+
   const elements = {
     input: document.querySelector('#url-input'),
     feedback: document.querySelector('.feedback'),
@@ -17,13 +28,13 @@ const app = () => {
     urls: [],
   };
 
-  const watchedState = watch(state, elements);
+  const watchedState = watch(state, elements, i18nextInstance);
 
   const validateUrl = (url, urls) => yup
     .string()
-    .url('Ссылка должна быть валидным URL')
-    .notOneOf(urls, 'RSS уже загружен')
-    .required()
+    .url('invalidUrl')
+    .notOneOf(urls, 'alreadyLoaded')
+    .required('required')
     .validate(url);
 
   elements.form.addEventListener('submit', (evt) => {
@@ -46,4 +57,5 @@ const app = () => {
       });
   });
 };
+
 export default app;
