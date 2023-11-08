@@ -1,6 +1,5 @@
-import './styles.css';
-import 'bootstrap';
-import 'on-change';
-import 'yup';
+import './styles.scss';
 
-console.log('Hello World!');
+import app from './app.js';
+
+app();
