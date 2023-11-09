@@ -1,9 +1,9 @@
-export default (data) => {
+export default (posts, elements) => {
   const ul = document.createElement('ul');
   ul.classList.add('list-group', 'border-0', 'rounded-0');
+  ul.innerHTML = '';
 
-  const { items } = data;
-  items.forEach((item) => {
+  posts.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add(
       'list-group-item',
@@ -23,7 +23,7 @@ export default (data) => {
     a.setAttribute('rel', 'noopener noreferrer');
 
     const button = document.createElement('button');
-    button.textContent = 'Просмотр';
+    button.textContent = 'Просмотр'; // i18next
     button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
     button.setAttribute('type', 'button');
     button.setAttribute('data-id', '2');
@@ -43,11 +43,13 @@ export default (data) => {
   cardBody.classList.add('card-body');
 
   const cardTitle = document.createElement('h2');
-  cardTitle.textContent = 'Посты';
+  cardTitle.textContent = 'Посты'; // i18next
   cardTitle.classList.add('card-title', 'h4');
 
   cardBody.prepend(cardTitle);
 
   card.prepend(cardBody);
   card.append(ul);
+
+  elements.posts.prepend(card);
 };
