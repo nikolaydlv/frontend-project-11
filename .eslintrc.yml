@@ -10,3 +10,4 @@ rules:
   no-console: 0
   import/extensions: 0
   import/no-extraneous-dependencies: "off"
+  no-param-reassign: 0
