@@ -6,7 +6,7 @@ import watch from './view.js';
 import ru from './locales/ru.js';
 import parser from './parser.js';
 
-const DELAY = 5000;
+const delay = 5000;
 
 const getProxiedUrl = (url) => {
   const resultUrl = new URL('https://allorigins.hexlet.app/get');
@@ -34,7 +34,7 @@ const getUpdatePosts = (state) => {
     }));
 
   Promise.all(promises)
-    .finally(() => setTimeout(() => getUpdatePosts(state), DELAY));
+    .finally(() => setTimeout(() => getUpdatePosts(state), delay));
 };
 
 const validateUrl = (url, urls) => yup
@@ -106,14 +106,11 @@ const app = async () => {
   });
 
   elements.posts.addEventListener('click', ({ target }) => {
-    if (target.dataset.id) {
-      const { id } = target.dataset;
-      watchedState.idCurrentPost = id;
-      if (!watchedState.idVisitedPosts.includes(id)) {
-        watchedState.idVisitedPosts.push(id);
-      }
+    const { id } = target.dataset;
+    watchedState.idCurrentPost = id;
+    if (!watchedState.idVisitedPosts.includes(id)) {
+      watchedState.idVisitedPosts.push(id);
     }
-    return false;
   });
 
   getUpdatePosts(watchedState);
