@@ -4,7 +4,10 @@ export default (data) => {
 
   const errorNode = doc.querySelector('parsererror');
   if (errorNode) {
-    throw new Error('invalidRss');
+    const e = new Error();
+    e.name = errorNode.textContent;
+    e.message = 'invalidRss';
+    throw e;
   }
 
   try {
