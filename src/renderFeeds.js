@@ -2,9 +2,7 @@ export default (feedsList, elements, i18next) => {
   const ul = document.createElement('div');
   ul.classList.add('list-group', 'border-0', 'rounded-0');
 
-  const flatFeedlist = feedsList.flat();
-
-  flatFeedlist.forEach((feed) => {
+  feedsList.forEach((feed) => {
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'border-0', 'border-end-0');
 
