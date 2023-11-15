@@ -6,3 +6,18 @@
 An RSS aggregator is a service for aggregating RSS feeds, which makes it convenient to read a variety of sources, such as blogs. It allows you to add an unlimited number of RSS feeds, updates them itself and adds new entries to the general feed.<br/>
 <br/>
 [Explore the demo by following this link](https://frontend-project-11-six-chi.vercel.app/)
+
+## Requirements:
+
+```
+Node.js v16+
+```
+
+### Installation guide
+
+````
+$ git@github.com:nikolaydlv/frontend-project-11.git
+$ make install
+$ make build
+$ make develop
+````
