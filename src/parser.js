@@ -21,10 +21,12 @@ export default (data) => {
       const title = item.querySelector('title').textContent;
       const description = item.querySelector('description').textContent;
       const link = item.querySelector('link').textContent;
+
       return { title, description, link };
     });
     return { feed, items };
   } catch (e) {
-    throw new Error('unknown');
+    e.message = 'unableToParseData';
+    throw e;
   }
 };
