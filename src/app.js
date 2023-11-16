@@ -15,7 +15,7 @@ const getProxiedUrl = (url) => {
   return resultUrl;
 };
 
-const getUpdatePosts = (state) => {
+const updatePosts = (state) => {
   const urls = state.feeds.map((feed) => feed.url);
   const promises = urls.map((url) => axios.get(getProxiedUrl(url))
     .then((response) => {
@@ -34,7 +34,7 @@ const getUpdatePosts = (state) => {
     }));
 
   Promise.all(promises)
-    .finally(() => setTimeout(() => getUpdatePosts(state), delay));
+    .finally(() => setTimeout(() => updatePosts(state), delay));
 };
 
 const validateUrl = (url, urls) => yup
@@ -113,7 +113,7 @@ const app = async () => {
     }
   });
 
-  getUpdatePosts(watchedState);
+  updatePosts(watchedState);
 };
 
 export default app;
