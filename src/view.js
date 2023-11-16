@@ -1,7 +1,5 @@
 import onChange from 'on-change';
-import renderFeeds from './renderFeeds';
-import renderPosts from './renderPosts';
-import renderModal from './renderModal';
+import { renderPosts, renderFeeds, renderModal } from './render';
 
 const clear = (elements) => {
   const { input, feedback, button } = elements;
