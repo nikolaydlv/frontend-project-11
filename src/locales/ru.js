@@ -6,7 +6,6 @@ export default {
       required: 'Не должно быть пустым',
       invalidRss: 'Ресурс не содержит валидный RSS',
       network: 'Ошибка сети',
-      unableToParseData: 'Неизвестная ошибка. Что-то пошло не так.',
     },
     status: {
       loading: 'Идёт загрузка',
