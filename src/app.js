@@ -79,6 +79,13 @@ const app = () => {
 
   const watchedState = watch(state, elements, i18nextInstance);
 
+  const typeError = (err) => {
+    if (err.name === 'AxiosError') {
+      return 'network';
+    }
+    return err.message;
+  };
+
   elements.form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
@@ -103,11 +110,8 @@ const app = () => {
       })
       .catch((err) => {
         watchedState.loadingProcess.status = 'failed';
-        if (err.name === 'AxiosError') {
-          watchedState.form.error = 'network';
-          return;
-        }
-        watchedState.form.error = err.message;
+        watchedState.form.error = typeError(err);
+        watchedState.form.valid = false;
       });
   });
 
