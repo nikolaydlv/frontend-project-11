@@ -17,11 +17,11 @@ const handleError = (errorMessage, elements, i18next) => {
   feedback.textContent = i18next.t(`errors.${errorMessage}`);
 };
 
-const handleForm = (state, elements, i18next) => {
+const handleLoading = (state, elements, i18next) => {
   const {
     input, feedback, form, button,
   } = elements;
-  const { status } = state.form;
+  const { status } = state.loadingProcess;
   clear(elements);
 
   switch (status) {
@@ -60,8 +60,8 @@ const renderVisitedPosts = (idVisitedPosts) => {
 
 const watch = (state, elements, i18nextInstance) => onChange(state, (path, value) => {
   switch (path) {
-    case 'form.status': {
-      handleForm(state, elements, i18nextInstance);
+    case 'loadingProcess.status': {
+      handleLoading(state, elements, i18nextInstance);
       break;
     }
     case 'form.error': {

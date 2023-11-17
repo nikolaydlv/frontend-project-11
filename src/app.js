@@ -17,7 +17,8 @@ const getProxiedUrl = (url) => {
 
 const updatePosts = (state) => {
   const urls = state.feeds.map((feed) => feed.url);
-  const promises = urls.map((url) => axios.get(getProxiedUrl(url))
+  const promises = urls.map((url) => axios
+    .get(getProxiedUrl(url))
     .then((response) => {
       const data = parser(response.data.contents);
 
@@ -33,8 +34,7 @@ const updatePosts = (state) => {
       console.error(err);
     }));
 
-  Promise.all(promises)
-    .finally(() => setTimeout(() => updatePosts(state), delay));
+  Promise.all(promises).finally(() => setTimeout(() => updatePosts(state), delay));
 };
 
 const validateUrl = (url, urls) => yup
@@ -64,8 +64,11 @@ const app = () => {
   };
 
   const state = {
+    loadingProcess: {
+      status: 'success',
+    },
     form: {
-      status: 'filling',
+      valid: true,
       error: null,
     },
     feeds: [],
@@ -80,10 +83,13 @@ const app = () => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     const currentUrl = formData.get('url');
-    watchedState.form.status = 'loading';
     const urls = state.feeds.map((feed) => feed.url);
+    watchedState.form.valid = true;
     validateUrl(currentUrl, urls)
-      .then((link) => axios.get(getProxiedUrl(link)))
+      .then((link) => {
+        watchedState.loadingProcess.status = 'loading';
+        return axios.get(getProxiedUrl(link));
+      })
       .then((response) => {
         const data = parser(response.data.contents);
         data.feed.id = _.uniqueId();
@@ -93,10 +99,10 @@ const app = () => {
         });
         watchedState.feeds.push(data.feed);
         watchedState.posts.unshift(...data.items);
-        watchedState.form.status = 'success';
+        watchedState.loadingProcess.status = 'success';
       })
       .catch((err) => {
-        watchedState.form.status = 'failed';
+        watchedState.loadingProcess.status = 'failed';
         if (err.name === 'AxiosError') {
           watchedState.form.error = 'network';
           return;
