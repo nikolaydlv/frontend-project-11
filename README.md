@@ -16,7 +16,7 @@ Node.js v16+
 ### Installation guide
 
 ````
-$ git@github.com:nikolaydlv/frontend-project-11.git
+$ git clone git@github.com:nikolaydlv/frontend-project-11.git
 $ make install
 $ make build
 $ make develop
