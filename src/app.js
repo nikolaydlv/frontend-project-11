@@ -107,6 +107,7 @@ const app = () => {
           watchedState.posts.unshift(...data.items);
           watchedState.loadingProcess.status = 'success';
           watchedState.form.valid = true;
+          watchedState.form.error = null;
         })
         .catch((err) => {
           watchedState.loadingProcess.status = 'failed';

@@ -15,6 +15,27 @@ const clear = (elements) => {
 const handleError = (errorMessage, elements, i18next) => {
   const { feedback } = elements;
   feedback.textContent = i18next.t(`errors.${errorMessage}`);
+  feedback.classList.add('text-danger');
+};
+
+const handleForm = (state, elements, i18next) => {
+  const { feedback } = elements;
+  const { valid } = state.form;
+
+  switch (valid) {
+    case true: {
+      feedback.classList.add('text-success');
+      feedback.textContent = i18next.t('successValidation');
+      break;
+    }
+    case false: {
+      feedback.classList.add('text-danger');
+      feedback.textContent = i18next.t(`errors.${[state.form.error]}`);
+      break;
+    }
+    default:
+      break;
+  }
 };
 
 const handleLoading = (state, elements, i18next) => {
@@ -33,16 +54,13 @@ const handleLoading = (state, elements, i18next) => {
       break;
     }
     case 'success': {
-      feedback.classList.add('text-success');
-      feedback.textContent = i18next.t(`status.${status}`);
       form.reset();
       input.focus();
+      handleForm(state, elements, i18next);
       break;
     }
     case 'failed': {
-      feedback.classList.add('text-danger');
       input.classList.add('is-invalid');
-      feedback.textContent = i18next.t(`errors.${[state.form.error]}`);
       break;
     }
     default:
